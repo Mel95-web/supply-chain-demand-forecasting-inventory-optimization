@@ -16,7 +16,7 @@ Python · PostgreSQL · SQL · Machine Learning · Excel
 | **ABC-Analyse** | 43,2 % der Artikel erzeugen 80 % des Umsatzes |
 | **Bestandsplanung** | Planung je Kategorie erfordert 19,8 % mehr Sicherheitsbestand als die aggregierte Planung (Risk Pooling) |
 | **Optimierung** | Kostenoptimaler Servicelevel von 98,1–99,1 % statt pauschal 95 %; rund **26 % geringere Kosten** für Sicherheitsbestand und Fehlmengen |
-| **Reporting** | Excel-Dashboard für Fachanwender |
+| **Reporting** | Excel-Dashboard und interaktive Streamlit-App für Fachanwender |
 
 ![Prognose der Testperiode](reports/forecast_testperiode.png)
 
@@ -91,6 +91,14 @@ Testperiode: 20.02.2016–22.05.2016 (93 Tage). Die Daten wurden strikt chronolo
 
 ---
 
+## Interaktives Dashboard
+
+Die Streamlit-App fasst Prognosen, Modellvergleich, Bestandskennzahlen und Servicelevel-Szenarien interaktiv zusammen.
+
+![Streamlit-Dashboard](reports/streamlit_dashboard.png)
+
+---
+
 ## Technologien
 
 | Bereich | Werkzeuge |
@@ -99,7 +107,7 @@ Testperiode: 20.02.2016–22.05.2016 (93 Tage). Die Daten wurden strikt chronolo
 | Datenbank | PostgreSQL, psycopg2, pgAdmin 4 |
 | Machine Learning | scikit-learn (HistGradientBoostingRegressor), SciPy |
 | Visualisierung | Matplotlib, Seaborn |
-| Reporting | Excel (openpyxl, Pivot-Tabellen, Dashboard) |Streamlit
+| Reporting | Excel (openpyxl, Pivot-Tabellen, Dashboard), Streamlit |
 
 ---
 
@@ -108,7 +116,7 @@ Testperiode: 20.02.2016–22.05.2016 (93 Tage). Die Daten wurden strikt chronolo
 ```
 ├── Supply_Chain_Demand_Forecasting_Inventory_Optimization.ipynb   # Hauptanalyse
 ├── sql/
-│   ├── supply_chain.sql      # Schema, Tabellen, Indizes, Analyseabfragen
+│   ├── Supply Chain.sql      # Schema, Tabellen, Indizes, Analyseabfragen
 │   ├── 01_create_warehouse.sql
 │   └── 02_create_indexes.sql
 ├── reports/
@@ -117,6 +125,8 @@ Testperiode: 20.02.2016–22.05.2016 (93 Tage). Die Daten wurden strikt chronolo
 │   ├── feature_importance.png
 │   ├── abc_analyse.png
 │   └── servicelevel_optimierung.png
+├── app/
+│   └── streamlit_app.py              # Interaktives Dashboard
 ├── requirements.txt
 └── README.md
 Streamlit
@@ -133,6 +143,10 @@ Streamlit
    ```
 3. **Datenbank anlegen:** PostgreSQL-Datenbank `supply_chain_dw` erstellen. Die Zugangsdaten werden über die lokale PostgreSQL-Konfiguration (z. B. `.pgpass`) gelesen, nicht im Code gespeichert.
 4. **Notebook ausführen:** `Kernel → Restart & Run All`. Bereits importierte Tabellen und ein vorhandener Excel-Report werden erkannt und nicht überschrieben.
+5. **Dashboard starten:** Die Streamlit-App liest den Excel-Report aus `reports/` und benötigt keine Datenbankverbindung.
+   ```bash
+   streamlit run app/streamlit_app.py
+   ```
 
 ---
 
@@ -141,6 +155,7 @@ Streamlit
 - Beobachtete Verkäufe entsprechen nicht zwangsläufig der tatsächlichen Nachfrage, da keine Bestandsdaten vorliegen.
 - Die Prognose erfolgt auf aggregierter Ebene; die Kategorieprognosen werden top-down abgeleitet.
 - Lieferzeit (7 Tage) und Kostensätze (Lagerhaltung 20 % p. a., Bestellkosten 500 USD, entgangene Marge 30 %) sind Annahmen und im Notebook zentral anpassbar.
+- Der Sicherheitsbestand basiert auf der Streuung von nur 28 Prognosefehlern einer rekursiven Prognose. Die Skalierung mit √Lieferzeit unterstellt unabhängige Tagesfehler; bei autokorrelierten Fehlern wird der Sicherheitsbestand eher unterschätzt.
 - Die Ergebnisse zeigen das methodische Vorgehen und ersetzen keine realen Bestellentscheidungen.
 
 ## Nächste Schritte
@@ -154,5 +169,5 @@ Streamlit
 
 ## Kontakt
 
-**Melanie Florine Noubissi Chimi** · [LinkedIn]https://www.linkedin.com/in/melanie-florine-noubissi-chimi-a96969185/ · 
-[E-Mail]melanie.chimi@yahoo.com
+**Melanie Florine Noubissi Chimi** · [LinkedIn](https://www.linkedin.com/in/melanie-florine-noubissi-chimi-a96969185/) · 
+[E-Mail](mailto:melanie.chimi@yahoo.com)

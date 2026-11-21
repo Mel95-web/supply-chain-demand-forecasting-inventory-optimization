@@ -7,3 +7,4 @@ scikit-learn
 scipy
 psycopg2-binary
 openpyxl
+Streamlit
