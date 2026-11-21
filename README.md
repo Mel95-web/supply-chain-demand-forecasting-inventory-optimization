@@ -129,7 +129,7 @@ Die Streamlit-App fasst Prognosen, Modellvergleich, Bestandskennzahlen und Servi
 │   └── streamlit_app.py              # Interaktives Dashboard
 ├── requirements.txt
 └── README.md
-Streamlit
+
 ```
 
 ---
