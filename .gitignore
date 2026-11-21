@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# Zugangsdaten und lokale Konfiguration
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Lokale Daten und große Zwischendateien
+data/raw/
+data/processed/
+*.parquet
+
+# Temporäre Dateien
+*.tmp
+*.log
+~$*.xlsx
+app/streamlit_app_backup.py
